@@ -5,7 +5,7 @@
 ## Author
 ##### `Zeng XiangJi`
 ## Environment
-##### OS: `Windows 7` later or `Linux`
+##### OS: `Windows 7` or later or `Linux`
 ##### Language: `Python3`
 ## Install & Run
 ##### 1. git clone https://github.com/CHENTsang/httpd.py.git
