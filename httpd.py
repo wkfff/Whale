@@ -72,6 +72,7 @@ def not_found(client_con):
 if __name__ == "__main__":
     server = init()
     if server:
+        print("server start at " + paras["host"] + ": " + str(paras["port"]), end = "\n")
         while True:
             con, address = server.accept()
             print("host:", address, end = "")
@@ -85,5 +86,5 @@ if __name__ == "__main__":
             else:
                 pass
     else:
-        print("Error: server can not start.You may check the system port occupancy")
+        print("Error: server can not start.You may check the system port occupancy", end = "\n")
     
