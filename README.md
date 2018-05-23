@@ -1,22 +1,16 @@
 # httpd.py
 The httpd.py project is a web software that was built by python. 
 
-简介
-
-httpd.py一个html服务程序的开源项目，它最初构建的目的是作者为了清楚了解html服务程序的运行机制，本代码参照了一开源项目tinyhttpd（C语言）。
-
-因为此版本是由python语言编写，故取名为httpd.py。这个项目力求以最简短的代码完成一个简陋的服务器软件，最终整个项目以100行左右的代码实现了一个静态html服务器程序。
-
-如果你希望弄懂html服务器软件的原理而又不希望深入了解，或者是不愿意花大把时间去读令人头疼的apache代码，那么本项目将是你最佳的练手选择。你只需花上两个小时的时间，仔细研读这份python代码，这将会使你对http工作机制有更深入的了解。
-
-
-
-其它
-
-作者：曾辰
-
-日期：2016-08-04
-
-运行环境：Windows10+Python2.7
-
-协议：GNU
+#### Introduce
+##### The httpd.py project is a simple and light web server that was built by python. The initial writting purpose is my curiosity about the work flow of web server. That means I want to figure out the web server architecture. To finish it,I have referenced another C language open source project - [tinyhttpd][1].
+##### The first goal of this project is built by minimal code line.If you want to learn operating priciple of a static web server and are unwilling to cost lots of time, this project will be your optimal option. You just need to take a few hours to read source code,then you will have more understanding on static web server or http protocol.
+#### Environment
+##### Operation System: `Windows` or `Linux`
+##### Language: `Python 2.7`
+#### Install & Run
+##### 1. git clone https://github.com/CHENTsang/httpd.py.git
+##### 2. cd httpd.py
+##### 3. python httpd.py
+#### Finally
+##### Wish you have a fun!
+[1] https://github.com/EZLippi/Tinyhttpd "tinyhttpd"
