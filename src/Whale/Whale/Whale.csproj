@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpRequest.cs" />
+    <Compile Include="HttpResponse.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="RequestMappingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

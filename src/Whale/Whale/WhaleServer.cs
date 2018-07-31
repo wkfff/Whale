@@ -98,16 +98,8 @@ namespace Whale
         /// <param name="client">从客户端传来的TCP对象</param>
         private void ProcessRequest(TcpClient client)
         {
-            Stream stream = client.GetStream();
-            StreamReader reader = new StreamReader(stream);
-            string[] contents = (reader.ReadLine().Split(' ')[1]).Split('?');
-            string url = contents[0];
-            Dictionary<string, string> paras = new Dictionary<string, string>();    //参数
-            foreach(string p in contents[1].Split('&'))
-            {
-                string[] kv = p.Split('=');
-                paras[kv[0]] = kv[1];
-            }
+            NetworkStream stream = client.GetStream();
+            HttpRequest request = new HttpRequest(stream);
             // 反射路由方法
             foreach(IController c in this.mControllers)
             {
@@ -118,31 +110,21 @@ namespace Whale
                     if(objs.Count() > 0)
                     {
                         RequestMappingAttribute attribute = objs[0] as RequestMappingAttribute;
-                        if (url.Equals(attribute.RoutePath))
+                        if (request.URL.Equals(attribute.RoutePath))
                         {
                             // 获取参数
                             var methodParas = method.GetParameters();
                             object[] temp = new object[methodParas.Count()];
                             for(int i = 0; i < methodParas.Count(); i++)
                             {
-                                temp[i] = paras[methodParas[i].Name];
+                                temp[i] = request.Parameters[methodParas[i].Name];
                             }
                             object response = method.Invoke(c, temp);
-                            byte[] bytes = null;
                             if (stream.CanWrite)
                             {
-                                // 发送响应头
-                                string header = string.Format("HTTP/1.1 200\r\nContent-Type:text/plain\r\n");
-                                bytes = Encoding.Default.GetBytes(header.ToString());
-                                stream.Write(bytes, 0, bytes.Length);
-                                // 发送空行
-                                bytes = Encoding.Default.GetBytes("\r\n");
-                                stream.Write(bytes, 0, bytes.Length);
-                                // 发送正文
-                                bytes = Encoding.Default.GetBytes(response.ToString());
-                                stream.Write(bytes, 0, bytes.Length);
+                                HttpResponse httpResponse = new HttpResponse(stream, "200 OK");
+                                httpResponse.Send(response.ToString());
                             }
-                            stream.Close();
                             break;
                         }
                     }
