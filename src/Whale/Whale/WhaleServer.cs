@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿/// ---------------------------------------------------------------------------------------------------
+/// WhaleServer.cs
+/// 
+///     功能：服务类
+///     日期：2018-07-31
+///     作者：曾祥极
+///     邮箱：tsangciee@gmail.com
+///     
+/// ---------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace Whale
@@ -99,35 +105,46 @@ namespace Whale
         private void ProcessRequest(TcpClient client)
         {
             NetworkStream stream = client.GetStream();
-            HttpRequest request = new HttpRequest(stream);
-            // 反射路由方法
-            foreach(IController c in this.mControllers)
+            try
             {
-                var methods = c.GetType().GetMethods();
-                foreach(var method in methods)
+                HttpRequest request = new HttpRequest(stream);
+                // 路由寻址
+                foreach (IController c in this.mControllers)
                 {
-                    object[] objs = method.GetCustomAttributes(typeof(RequestMappingAttribute), true);
-                    if(objs.Count() > 0)
+                    var methods = c.GetType().GetMethods(); // 得到控制层对象所有方法
+                    foreach (var method in methods)
                     {
-                        RequestMappingAttribute attribute = objs[0] as RequestMappingAttribute;
-                        if (request.URL.Equals(attribute.RoutePath))
+                        object[] attributes = method.GetCustomAttributes(typeof(RequestMappingAttribute), true);    // 得到函数的所有RequestMappingAttribute特性
+                        if (attributes.Count() > 0)
                         {
-                            // 获取参数
-                            var methodParas = method.GetParameters();
-                            object[] temp = new object[methodParas.Count()];
-                            for(int i = 0; i < methodParas.Count(); i++)
+                            RequestMappingAttribute attribute = attributes[0] as RequestMappingAttribute;
+                            if (request.URL.Equals(attribute.RoutePath))    // 如果函数RequestMappingAttribute路径与Request.URL相同，寻址成功
                             {
-                                temp[i] = request.Parameters[methodParas[i].Name];
+                                var methodParameters = method.GetParameters();   // 获取参数
+                                object[] parameters = new object[methodParameters.Count()];
+                                for (int i = 0; i < methodParameters.Count(); i++)
+                                {
+                                    parameters[i] = request.Parameters[methodParameters[i].Name];
+                                }
+                                object response = method.Invoke(c, parameters);
+                                if (stream.CanWrite)
+                                {
+                                    HttpResponse httpResponse = new HttpResponse(stream, "200 OK");
+                                    httpResponse.Send(response.ToString());
+                                    Thread.CurrentThread.Abort();
+                                }
+                                break;
                             }
-                            object response = method.Invoke(c, temp);
-                            if (stream.CanWrite)
-                            {
-                                HttpResponse httpResponse = new HttpResponse(stream, "200 OK");
-                                httpResponse.Send(response.ToString());
-                            }
-                            break;
                         }
                     }
+                }
+            }
+            catch(Exception ex)
+            {
+                if (stream.CanWrite)
+                {
+                    HttpResponse httpResponse = new HttpResponse(stream, "200 OK");
+                    httpResponse.Send(string.Format("{{'status': 'false', 'msg': '{0}'}}", ex.Message));
                 }
             }
         }
