@@ -1,15 +1,35 @@
-# httpd.py
-## Introduce
-##### The httpd.py project is a simple and light web server that was built by python. The initial writting purpose is my curiosity about the work flow of web server. That means I want to figure out the web server architecture. In order to finish it,I have referenced another C language open source project - <a href = "https://github.com/EZLippi/Tinyhttpd">tinyhttpd</a>.
-##### The first goal of this project is built by minimal code line. If you want to learn operating principle of a static web server and are unwilling to spend lots of time, this project will be your optimal option. You just need to take a few hours to read source code, then you will have more understanding on static web server or http protocol.
-## Author
-##### `Zeng XiangJi`
-## Environment
-##### OS: `Windows 7` or later or `Linux`
-##### Language: `Python3`
-## Install & Run
-##### 1. git clone https://github.com/CHENTsang/httpd.py.git
-##### 2. cd httpd.py
-##### 3. python httpd.py
-## Finally
-##### Wish you have a fun!
+# <img src="img/whale.png" width="30" height = "30"></img> Whale
+## 介绍
+##### Whale是一个CSharp编写、restful风格、并且基于http协议的服务软件，它可以帮助你快速开发一些小型服务，目前支持：
+* 路由方法
+## 快速开始
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Whale;
+
+namespace ServerExample
+{
+    class Program
+    {
+        public class User: IController
+        {
+            
+            [RequestMapping("/user/login")]
+            public string Test(string username, string password)
+            {
+                return string.Format("[username = {0}, password = {1}]", username, password);
+            }
+        }
+        static void Main(string[] args)
+        {
+            List<IController> users = new List<IController>();
+            users.Add(new User());
+            WhaleServer server = new WhaleServer("127.0.0.1", 8080, users);
+            server.Start();
+        }
+    }
+}
+```

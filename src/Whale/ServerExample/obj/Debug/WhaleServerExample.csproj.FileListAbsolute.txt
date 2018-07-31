@@ -1,0 +1,9 @@
+D:\git-repo\Whale\WhaleServerExample\bin\Debug\WhaleServerExample.exe
+D:\git-repo\Whale\WhaleServerExample\bin\Debug\WhaleServerExample.pdb
+D:\git-repo\Whale\WhaleServerExample\bin\Debug\Whale.dll
+D:\git-repo\Whale\WhaleServerExample\bin\Debug\Whale.pdb
+D:\git-repo\Whale\WhaleServerExample\obj\Debug\WhaleServerExample.csprojAssemblyReference.cache
+D:\git-repo\Whale\WhaleServerExample\obj\Debug\WhaleServerExample.csproj.CoreCompileInputs.cache
+D:\git-repo\Whale\WhaleServerExample\obj\Debug\WhaleServerExample.csproj.CopyComplete
+D:\git-repo\Whale\WhaleServerExample\obj\Debug\WhaleServerExample.exe
+D:\git-repo\Whale\WhaleServerExample\obj\Debug\WhaleServerExample.pdb
