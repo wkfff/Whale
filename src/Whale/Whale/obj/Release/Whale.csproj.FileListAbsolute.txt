@@ -1,0 +1,6 @@
+D:\git-repo\Whale\src\Whale\Whale\bin\Release\Whale.dll
+D:\git-repo\Whale\src\Whale\Whale\bin\Release\Whale.pdb
+D:\git-repo\Whale\src\Whale\Whale\obj\Release\Whale.csprojAssemblyReference.cache
+D:\git-repo\Whale\src\Whale\Whale\obj\Release\Whale.csproj.CoreCompileInputs.cache
+D:\git-repo\Whale\src\Whale\Whale\obj\Release\Whale.dll
+D:\git-repo\Whale\src\Whale\Whale\obj\Release\Whale.pdb

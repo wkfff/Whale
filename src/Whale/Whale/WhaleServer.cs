@@ -48,13 +48,21 @@ namespace Whale
         /// </summary>
         /// <param name="ip">服务IP</param>
         /// <param name="port">服务端口</param>
-        /// <param name="controllers">服务业务控制对象</param>
-        public WhaleServer(string ip, int port, List<IController> controllers)
+        public WhaleServer(string ip, int port)
         {
             this.mIP = ip;
             this.mPort = port;
-            this.mControllers = controllers;
+            this.mControllers = new List<IController>();
             this.IsRunning = false;
+        }
+
+        /// <summary>
+        /// 注册服务
+        /// </summary>
+        /// <param name="controller">控制层对象</param>
+        public void RegisterController(IController controller)
+        {
+            this.mControllers.Add(controller);
         }
 
         /// <summary>
