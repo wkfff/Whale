@@ -84,7 +84,7 @@ namespace Whale
             var status = rows[0].Split(' ');
             this.HttpMethod = status[0];
             this.ProtocolVersion = status[2];
-            if (status[1].Contains("?"))
+            if (this.HttpMethod.ToUpper().Equals("GET") && status[1].Contains("?"))
             {
                 // 有参数
                 var temp = status[1].Split('?');
