@@ -6,7 +6,6 @@ D:\git-repo\Whale\Whale\obj\Debug\Whale.dll
 D:\git-repo\Whale\Whale\obj\Debug\Whale.pdb
 D:\git-repo\Whale\src\Whale\Whale\bin\Debug\Whale.dll
 D:\git-repo\Whale\src\Whale\Whale\bin\Debug\Whale.pdb
-D:\git-repo\Whale\src\Whale\Whale\obj\Debug\Whale.csprojAssemblyReference.cache
 D:\git-repo\Whale\src\Whale\Whale\obj\Debug\Whale.csproj.CoreCompileInputs.cache
 D:\git-repo\Whale\src\Whale\Whale\obj\Debug\Whale.dll
 D:\git-repo\Whale\src\Whale\Whale\obj\Debug\Whale.pdb

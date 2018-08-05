@@ -78,7 +78,8 @@ namespace Whale
             {
                 len = this.mStrem.Read(mBuffer, 0, MAX_BUFFER_SIZE);
                 data.Append(Encoding.UTF8.GetString(mBuffer, 0, len));
-            }while (this.mStrem.DataAvailable);
+            }
+            while (len > 0 && !data.ToString().Contains(string.Format("{0}{0}", Environment.NewLine))); // 数据包含第三行及第四行，数据接收完毕
             var rows = Regex.Split(data.ToString(), Environment.NewLine);  //得到所有数据行
             // 状态行
             var status = rows[0].Split(' ');
@@ -110,13 +111,24 @@ namespace Whale
                     break;
                 }
                 var keyValue = rows[start].Split(':');
-                this.Headers[keyValue[0].Trim()] = keyValue[1].Trim();
+                this.Headers[keyValue[0].Trim().ToLower()] = keyValue[1].Trim().ToLower();
             }
             // 请求体
             StringBuilder builder = new StringBuilder();
             for (; start < end; start++)
             {
-                builder.AppendLine(rows[start]);
+                builder.Append(rows[start]);
+            }
+            string method = this.HttpMethod.ToUpper();
+            if ((method.Equals("POST") || method.Equals("PUT") || method.Equals("DELETE")) && (builder.Length == 0))
+            {
+                int length = int.Parse(this.Headers["content-length"]);
+                do
+                {
+                    len = this.mStrem.Read(mBuffer, 0, MAX_BUFFER_SIZE);
+                    builder.Append(Encoding.UTF8.GetString(mBuffer, 0, len));
+                }
+                while (builder.Length < length && this.mStrem.DataAvailable);
             }
             this.Body = builder.ToString();
         }
