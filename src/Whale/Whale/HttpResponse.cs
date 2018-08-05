@@ -82,7 +82,7 @@ namespace Whale
                 builder.AppendLine(string.Format("{0}: {1}", str, this.Headers[str]));
             }
             builder.AppendLine("");
-            builder.AppendLine(content);
+            builder.Append(content);
             this.mBuffer = Encoding.UTF8.GetBytes(builder.ToString());
             this.mStrem.Write(this.mBuffer, 0, this.mBuffer.Length);
             this.mStrem.Close();
