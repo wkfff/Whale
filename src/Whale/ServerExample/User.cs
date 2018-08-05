@@ -10,13 +10,11 @@ namespace ServerExample
         /// <summary>
         /// 登录方法
         /// </summary>
-        /// <param name="username">用户名</param>
-        /// <param name="password">密码</param>
         /// <returns></returns>
         [RequestMapping("/user/login")]
-        public string Login(string username, string password)
+        public string Login()
         {
-            return string.Format("[username = {0}, password = {1}]", username, password);
+            return string.Format("{{'username': '{0}', 'password': '{1}'}}", "test", "123");
         }
     }
 }

@@ -73,12 +73,12 @@ namespace Whale
             this.Parameters = new Dictionary<string, string>();
             StringBuilder data = new StringBuilder();
             // 读取数据
-            while (this.mStrem.DataAvailable)
+            int len = 0;
+            do
             {
-                int len = 0;
                 len = this.mStrem.Read(mBuffer, 0, MAX_BUFFER_SIZE);
                 data.Append(Encoding.UTF8.GetString(mBuffer, 0, len));
-            }
+            }while (this.mStrem.DataAvailable);
             var rows = Regex.Split(data.ToString(), Environment.NewLine);  //得到所有数据行
             // 状态行
             var status = rows[0].Split(' ');
