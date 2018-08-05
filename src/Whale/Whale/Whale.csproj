@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HTTPMethod.cs" />
-    <Compile Include="HttpRequest.cs" />
-    <Compile Include="HttpResponse.cs" />
+    <Compile Include="HTTPRequest.cs" />
+    <Compile Include="HTTPResponse.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="RequestMappingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

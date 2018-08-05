@@ -115,7 +115,7 @@ namespace Whale
             NetworkStream stream = client.GetStream();
             try
             {
-                HttpRequest request = new HttpRequest(stream);
+                HTTPRequest request = new HTTPRequest(stream);
                 // 路由寻址
                 foreach (IController c in this.mControllers)
                 {
@@ -128,16 +128,16 @@ namespace Whale
                             RequestMappingAttribute attribute = attributes[0] as RequestMappingAttribute;
                             if (request.URL.Equals(attribute.RoutePath))    // 如果函数RequestMappingAttribute路径与Request.URL相同，寻址成功
                             {
-                                var methodParameters = method.GetParameters();   // 获取参数
-                                object[] parameters = new object[methodParameters.Count()];
-                                for (int i = 0; i < methodParameters.Count(); i++)
-                                {
-                                    parameters[i] = request.Parameters[methodParameters[i].Name];
-                                }
-                                object response = method.Invoke(c, parameters);
+                                //var methodParameters = method.GetParameters();   // 获取参数
+                                //object[] parameters = new object[methodParameters.Count()];
+                                //for (int i = 0; i < methodParameters.Count(); i++)
+                                //{
+                                //    parameters[i] = request.Parameters[methodParameters[i].Name];
+                                //}
+                                object response = method.Invoke(c, new object[]{ request});
                                 if (stream.CanWrite)
                                 {
-                                    HttpResponse httpResponse = new HttpResponse(stream, "200 OK");
+                                    HTTPResponse httpResponse = new HTTPResponse(stream, "200 OK");
                                     httpResponse.Send(response.ToString());
                                     Thread.CurrentThread.Abort();
                                 }
@@ -151,7 +151,7 @@ namespace Whale
             {
                 if (stream.CanWrite)
                 {
-                    HttpResponse httpResponse = new HttpResponse(stream, "200 OK");
+                    HTTPResponse httpResponse = new HTTPResponse(stream, "200 OK");
                     httpResponse.Send(string.Format("{{'status': 'false', 'msg': '{0}'}}", ex.Message));
                 }
             }

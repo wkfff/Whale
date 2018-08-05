@@ -1,5 +1,5 @@
 ﻿/// ---------------------------------------------------------------------------------------------------
-/// HttpRequest.cs
+/// HTTPRequest.cs
 /// 
 ///     功能：HTTP请求体
 ///     日期：2018-07-31
@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 namespace Whale
 {
-    class HttpRequest
+    public class HTTPRequest
     {
         /// <summary>
         /// 缓冲区最大长度（2M）
@@ -66,7 +66,7 @@ namespace Whale
         /// 构造函数
         /// </summary>
         /// <param name="stream">网络流</param>
-        public HttpRequest(NetworkStream stream)
+        public HTTPRequest(NetworkStream stream)
         {
             this.mStrem = stream;
             this.Headers = new Dictionary<string, string>();

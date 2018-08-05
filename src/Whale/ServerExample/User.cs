@@ -12,9 +12,9 @@ namespace ServerExample
         /// </summary>
         /// <returns></returns>
         [RequestMapping("/user/login")]
-        public string Login()
+        public string Login(HTTPRequest request)
         {
-            return string.Format("{{'username': '{0}', 'password': '{1}'}}", "test", "123");
+            return string.Format("{{'username': '{0}', 'password': '{1}'}}", request.Parameters["username"], request.Parameters["password"]);
         }
     }
 }

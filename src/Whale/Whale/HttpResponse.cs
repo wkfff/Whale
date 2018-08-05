@@ -1,5 +1,5 @@
 ﻿/// ---------------------------------------------------------------------------------------------------
-/// HttpResponse.cs
+/// HTTPResponse.cs
 /// 
 ///     功能：HTTP响应体
 ///     日期：2018-07-31
@@ -14,7 +14,7 @@ using System.Text;
 
 namespace Whale
 {
-    class HttpResponse
+    public class HTTPResponse
     {
         /// <summary>
         /// 缓冲区最大长度（2M）
@@ -56,7 +56,7 @@ namespace Whale
         /// </summary>
         /// <param name="stream">网络流</param>
         /// <param name="statusCode">状态码（成功请求200 OK）</param>
-        public HttpResponse(NetworkStream stream, string statusCode)
+        public HTTPResponse(NetworkStream stream, string statusCode)
         {
             this.mStrem = stream;
             this.Headers = new Dictionary<string, string>();
