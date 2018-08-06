@@ -48,5 +48,8 @@ namespace ServerExample
 #### 4 访问测试
 ##### 访问<a href="http://127.0.0.1:8080/user/login?username=1&password=1">http://127.0.0.1:8080/user/login?username=1&password=1</a>即可得到如下结果：
 ```
-[username = 1, password = 1]
+{
+    "username": "1",
+    "password": "1"
+}
 ```
